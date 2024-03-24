@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import '../viewmodels/game_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -16,12 +17,14 @@ class WordItem extends StatefulWidget {
   final WordModel word;
   final bool showStartLeaf;
   final bool showEndLeaf;
+  final bool isAnimationVisible;
 
   const WordItem({
     Key? key,
     required this.word,
     this.showStartLeaf = false,
     this.showEndLeaf = true,
+    this.isAnimationVisible = false,
   }) : super(key: key);
 
   @override
@@ -95,6 +98,11 @@ class _WordItemState extends State<WordItem> {
               width: 160,
               height: 66,
             ),
+            if (widget.isAnimationVisible)
+              Center(
+                child: Lottie.network(
+                    'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+              ),
             if (widget.word.state == WordState.correct)
               Positioned(
                 top: 0,

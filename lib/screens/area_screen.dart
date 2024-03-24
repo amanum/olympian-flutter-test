@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:olympian/models/word_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -138,6 +139,13 @@ class __NestedScrollState extends State<_NestedScroll> {
                                 (widthOffset / wordWidth).floor() <= index;
                             final showStartLeaf =
                                 (widthOffset / wordWidth).floor() == index;
+
+                            final isFirstLevel = vm.activeLevel.id == vm.levels.first.id;
+                            final isFirstWord = group.indexOf(word) == 0;
+                            final isAnimationVisible = isFirstLevel &&
+                                index == 0 &&
+                                isFirstWord &&
+                                word.state == WordState.idle;
                             return AnimatedBuilder(
                               animation: _scrollCtrl,
                               builder: (context, child) {
@@ -165,6 +173,7 @@ class __NestedScrollState extends State<_NestedScroll> {
                                 word: word,
                                 showEndLeaf: showEndLeaf,
                                 showStartLeaf: showStartLeaf,
+                                isAnimationVisible: isAnimationVisible,
                               ),
                             );
                           }).toList(),
