@@ -44,9 +44,9 @@ class _WordItemState extends State<WordItem> {
 
     _wordFocusNode.addListener(() {
       context.read<GameViewModel>().wordFocus(
-        word: widget.word,
-        focus: _wordFocusNode.hasFocus,
-      );
+            word: widget.word,
+            focus: _wordFocusNode.hasFocus,
+          );
 
       if (!_wordFocusNode.hasFocus) {
         context.read<GameViewModel>().clearActiveWord();
@@ -69,14 +69,14 @@ class _WordItemState extends State<WordItem> {
           onShow: () {
             _wordFocusNode.unfocus();
             _textController.clear();
-          }
-      );
+          });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final showInput = [WordState.idle, WordState.incorrect, WordState.input].contains(widget.word.state);
+    final showInput =
+        [WordState.idle, WordState.incorrect, WordState.input].contains(widget.word.state);
     final showImageInput = widget.word.image != '' || widget.word.description != '';
 
     if (!_wordFocusNode.hasFocus && _textController.value.text != '') {
@@ -101,7 +101,7 @@ class _WordItemState extends State<WordItem> {
             if (widget.isAnimationVisible)
               Center(
                 child: Lottie.network(
-                    'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+                    'https://raw.githubusercontent.com/imakarov/olympian-flutter-test/master/Animation.json'),
               ),
             if (widget.word.state == WordState.correct)
               Positioned(
@@ -116,8 +116,8 @@ class _WordItemState extends State<WordItem> {
                       widget.word.word.capitalize(),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: ThemeText.wordItemCorrect.merge(
-                          TextStyle(fontSize: _isCorrectWordLong ? 12 : 16)),
+                      style: ThemeText.wordItemCorrect
+                          .merge(TextStyle(fontSize: _isCorrectWordLong ? 12 : 16)),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -171,8 +171,7 @@ class _WordItemState extends State<WordItem> {
                         : ThemeText.wordItemInput,
                     onSubmitted: (value) {
                       final vm = context.read<GameViewModel>();
-                      if (!vm.checkWord(
-                              word: widget.word, value: value, ctx: context) &&
+                      if (!vm.checkWord(word: widget.word, value: value, ctx: context) &&
                           value.isNotEmpty) {
                         _textController.clear();
                         _wordFocusNode.requestFocus();
