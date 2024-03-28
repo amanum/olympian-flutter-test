@@ -100,8 +100,7 @@ class _WordItemState extends State<WordItem> {
             ),
             if (widget.isAnimationVisible)
               Center(
-                child: Lottie.network(
-                    'https://raw.githubusercontent.com/imakarov/olympian-flutter-test/master/Animation.json'),
+                child: Lottie.asset('assets/animations/animation.json'),
               ),
             if (widget.word.state == WordState.correct)
               Positioned(
